@@ -10,21 +10,25 @@ const Home = () => {
   const startOfMonth = today.startOf('month');
   const endOfMonth = today.endOf('month');
   const monthLength = endOfMonth.day - startOfMonth.day;
-  console.log(startOfMonth);
-  const ddd: DateTime[] = [];
-  for (let i=0; i<monthLength; i++ ){
-    ddd[i] = startOfMonth.plus({days: i});
-  }
+
+  const test: DateTime[] = Array(monthLength).fill(0);
+  const str = test.map((_, i) => (
+    test[i] = startOfMonth.plus({days: i})
+  ))
+  //test[0] = startOfMonth.plus({days: 1});
+  console.log(test);
+
+  const arr = Array(3).fill(0);
+  console.log(arr);
 
   const dateUp = () => {
     setToday(today.plus({months: 1}));
   }
 
-  const alartDay = (day: DateTime) => {
-    alert(day);
+  const dateDown = () => {
+    setToday(today.minus({months: 1}));
   }
 
-  console.log(ddd);
   return (
     <div className={styles.container}>
       <Head>
@@ -34,15 +38,17 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        <button onClick={dateUp}>+</button>
-        {ddd.map((dd, index) => (
-          <div key={index}>
-            <button onClick={() => alartDay(dd)}>
-            {dd.month}:
-            {dd.day}
-            </button>
+      <button onClick={dateUp}>+</button>
+      {today.month}月
+      <button onClick={dateDown}>+</button>
+        
+        {str.map((tes, i) => (
+          <div key={i}>
+            {tes.day}
           </div>
         ))}
+        
+
       </main>
 
       <footer className={styles.footer}>
